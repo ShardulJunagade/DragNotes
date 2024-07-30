@@ -1,10 +1,10 @@
 import { useEffect, useRef, useState } from 'react';
-import { Trash } from '../icons/Trash';
 import { autoGrow, bodyParser, setNewOffset, setZIndex } from '../utils/utils';
 import { db } from '../appwrite/databases';
 import { Spinner } from '../icons/Spinner';
+import DeleteButton from './DeleteButton';
 
-const NoteCard = ({note}) => {
+const NoteCard = ({note, setNotes}) => {
   const [position, setPosition] = useState(JSON.parse(note.position));
   const colors = JSON.parse(note.colors);
   const body = bodyParser(note.body);
@@ -22,13 +22,16 @@ const NoteCard = ({note}) => {
 
 
   const mouseDown = (e) => {
-    setZIndex(cardRef.current);
+    if (e.target.className === "card-header") {
+          
+      setZIndex(cardRef.current);
 
-    mosueStartPos.x = e.clientX;
-    mosueStartPos.y = e.clientY;
+      mosueStartPos.x = e.clientX;
+      mosueStartPos.y = e.clientY;
 
-    document.addEventListener('mousemove', mouseMove);
-    document.addEventListener("mouseup", mouseUp);
+      document.addEventListener('mousemove', mouseMove);
+      document.addEventListener("mouseup", mouseUp);
+    }
   }
 
   const mouseMove = (e) => {
@@ -85,7 +88,7 @@ const NoteCard = ({note}) => {
       <div className='card-header'
         onMouseDown={mouseDown}
         style={{backgroundColor: colors.colorHeader}}>
-        <Trash />
+        <DeleteButton noteId={note.$id} setNotes={setNotes} />
 
         {saving && (
         <div className="card-saving">
