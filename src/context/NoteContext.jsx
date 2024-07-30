@@ -25,8 +25,7 @@ const NoteProvider = ({children}) => {
     notes,
     setNotes,
     selectedNote,
-    setSelectedNote,
-    db,
+    setSelectedNote
   };
 
   return <NoteContext.Provider value={contextData}>

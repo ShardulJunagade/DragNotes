@@ -1,8 +1,9 @@
 import React, { useContext } from 'react';
 import { NoteContext } from '../context/NoteContext';
+import { db } from '../appwrite/databases';
 
 const Color = ({ color }) => {
-  const { selectedNote, notes, setNotes, db } = useContext(NoteContext);
+  const { selectedNote, notes, setNotes} = useContext(NoteContext);
 
   const changeColor = async () => {
     console.log("Color: ", color);
