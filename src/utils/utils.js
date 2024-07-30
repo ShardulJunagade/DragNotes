@@ -15,7 +15,7 @@ export const setNewOffset = (card, mouseMoveDir = { x: 0, y: 0 }) => {
 };
 
 export const setZIndex = (selectedCard) => {
-  selectedCard.style.setZIndex = 999;
+  selectedCard.style.zIndex = 999;
 
   const cards = Array.from(document.getElementsByClassName("card"));
   cards.forEach((card) => {
