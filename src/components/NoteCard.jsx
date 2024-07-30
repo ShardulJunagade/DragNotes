@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { Trash } from '../icons/Trash';
 import { autoGrow, bodyParser, setNewOffset, setZIndex } from '../utils/utils';
+import { db } from '../appwrite/databases';
 
 const NoteCard = ({note}) => {
   const [position, setPosition] = useState(JSON.parse(note.position));
@@ -26,11 +27,6 @@ const NoteCard = ({note}) => {
     document.addEventListener("mouseup", mouseUp);
   }
 
-  const mouseUp = () => {
-    document.removeEventListener("mousemove", mouseMove);
-    document.removeEventListener("mouseup", mouseUp);
-  }
-
   const mouseMove = (e) => {
     const mouseMoveDir = {
       x: mosueStartPos.x - e.clientX,
@@ -42,6 +38,23 @@ const NoteCard = ({note}) => {
   
     const newPosition = setNewOffset(cardRef.current, mouseMoveDir);
     setPosition(newPosition);
+  };
+
+  const mouseUp = () => {
+    document.removeEventListener("mousemove", mouseMove);
+    document.removeEventListener("mouseup", mouseUp);
+
+    const newPosition = setNewOffset(cardRef.current);
+    saveData("position", newPosition)
+  }
+
+  const saveData = async (key, value) => {
+    const payload = { [key]: JSON.stringify(value) };
+    try {
+        await db.notes.update(note.$id, payload);
+    } catch (error) {
+        console.error(error);
+    }
   };
 
   return (
