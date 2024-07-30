@@ -13,3 +13,14 @@ export const setNewOffset = (card, mouseMoveDir = { x: 0, y: 0 }) => {
     y: offsetTop < 0 ? 0 : offsetTop,
   };
 };
+
+export const setZIndex = (selectedCard) => {
+  selectedCard.style.setZIndex = 999;
+
+  const cards = Array.from(document.getElementsByClassName("card"));
+  cards.forEach((card) => {
+    if (card !== selectedCard) {
+      card.style.zIndex = selectedCard.style.zIndex - 1;
+    }
+  });
+}

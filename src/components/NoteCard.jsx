@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import { Trash } from '../icons/Trash';
-import { autoGrow, setNewOffset } from '../utils/utils';
+import { autoGrow, setNewOffset, setZIndex } from '../utils/utils';
 
 const NoteCard = ({note}) => {
   const [position, setPosition] = useState(JSON.parse(note.position));
@@ -17,6 +17,8 @@ const NoteCard = ({note}) => {
 
 
   const mouseDown = (e) => {
+    setZIndex(cardRef.current);
+    
     mosueStartPos.x = e.clientX;
     mosueStartPos.y = e.clientY;
 
@@ -57,7 +59,10 @@ const NoteCard = ({note}) => {
 
       <div className='card-body'> 
         <textarea
-        ref={textAreaRef}
+          onFocus={()=> {
+            setZIndex(cardRef.current);
+          }}
+          ref={textAreaRef}
           style={{color: colors.colorText}}
           defaultValue={body}
           onInput={() => {autoGrow(textAreaRef)}}
