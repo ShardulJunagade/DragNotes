@@ -6,6 +6,12 @@
         "colorText": "#333333"
     },
     {
+        "id": "color-orange",
+        "colorHeader": "#FF9800",
+        "colorBody": "#FFE0B2",
+        "colorText": "#333333"
+    },
+    {
         "id": "color-green",
         "colorHeader": "#8BC34A",
         "colorBody": "#DCEDC8",
@@ -22,12 +28,5 @@
         "colorHeader": "#BA68C8",
         "colorBody": "#E1BEE7",
         "colorText": "#333333"
-    },
-    {
-        "id": "color-orange",
-        "colorHeader": "#FF9800",
-        "colorBody": "#FFE0B2",
-        "colorText": "#333333"
     }
 ]
-  
