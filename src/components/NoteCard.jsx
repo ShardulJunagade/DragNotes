@@ -4,7 +4,7 @@ import { db } from '../appwrite/databases';
 import { Spinner } from '../icons/Spinner';
 import DeleteButton from './DeleteButton';
 
-const NoteCard = ({note, setNotes}) => {
+const NoteCard = ({note}) => {
   const [position, setPosition] = useState(JSON.parse(note.position));
   const colors = JSON.parse(note.colors);
   const body = bodyParser(note.body);
@@ -23,7 +23,7 @@ const NoteCard = ({note, setNotes}) => {
 
   const mouseDown = (e) => {
     if (e.target.className === "card-header") {
-          
+
       setZIndex(cardRef.current);
 
       mosueStartPos.x = e.clientX;
@@ -88,7 +88,7 @@ const NoteCard = ({note, setNotes}) => {
       <div className='card-header'
         onMouseDown={mouseDown}
         style={{backgroundColor: colors.colorHeader}}>
-        <DeleteButton noteId={note.$id} setNotes={setNotes} />
+        <DeleteButton noteId={note.$id} />
 
         {saving && (
         <div className="card-saving">
