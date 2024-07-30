@@ -9,6 +9,7 @@ const Color = ({ color }) => {
     console.log("Color: ", color);
     console.log("Selected Note: ", selectedNote);
     
+    try {
       const currentNoteIndex = notes.findIndex(
           (note) => note.$id === selectedNote.$id
       );
@@ -25,6 +26,9 @@ const Color = ({ color }) => {
       const response = await db.notes.update(selectedNote.$id, {
           colors: JSON.stringify(color),
       });
+    } catch(error) {
+      alert("You must select a note before changing colors");
+    }
   };
 
   return (
