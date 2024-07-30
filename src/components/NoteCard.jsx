@@ -16,8 +16,10 @@ const NoteCard = ({note}) => {
   const cardRef = useRef(null);
 
   const textAreaRef = useRef(null);
+
   useEffect(() => {
     autoGrow(textAreaRef);
+    setZIndex(cardRef.current);
   }, [])
 
 
